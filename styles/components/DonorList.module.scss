@@ -1,0 +1,29 @@
+.donortable {
+  width: 100%;
+  padding-top: 1rem;
+  th,
+  td {
+    padding: 1rem;
+    font-size: 1.3rem;
+    font-family: "Inter";
+  }
+  th {
+    letter-spacing: 1px;
+    text-align: center;
+    color: var(--font-color);
+    border-bottom: 1px solid var(--font-color);
+  }
+  thead {
+    th:nth-child(1) {
+      width: 40%;
+    }
+    th:nth-child(2) {
+      width: 10%;
+    }
+  }
+  tbody td {
+    text-align: center;
+    letter-spacing: 1px;
+    color: var(--font-color-light);
+  }
+}

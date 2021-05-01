@@ -8,10 +8,12 @@ export default function Home({ staticData, name }) {
   return (
     <div className={styles.container}>
       <Head>
-        <title>Create Next App</title>
+        <title>Avail Plasma</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
+
       <header className={styles.header}>
+        <img src="logo.svg" className={styles.header__logo} />
         <svg className={styles.header__search}>
           <use href="sprite.svg#icon-search" />
         </svg>

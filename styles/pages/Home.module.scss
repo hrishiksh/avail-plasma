@@ -3,8 +3,11 @@
   height: 7rem;
   display: flex;
   align-items: center;
-  justify-content: flex-end;
-  padding: 0rem 3rem 0rem 0rem;
+  justify-content: space-between;
+  padding: 0rem 2rem;
+  &__logo {
+    height: 3.5rem;
+  }
   &__search {
     height: 2.5rem;
     width: 2.5rem;
@@ -12,8 +15,8 @@
 }
 
 .main {
-  margin: 2rem;
   &__hero {
+    margin: 4rem 2rem;
     display: flex;
     &__textbtn {
       width: 70%;
@@ -38,7 +41,7 @@
 }
 
 .main__details {
-  padding: 4rem 0rem 0rem 0rem;
+  margin: 6rem 2rem 0rem;
   &__title {
     &__bold {
       font-size: 2rem;
