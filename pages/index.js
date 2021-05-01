@@ -1,8 +1,8 @@
 import Head from "next/head";
 import styles from "../styles/pages/Home.module.scss";
-import { useEffect, useState } from "react";
 import fire from "../config/fire-config";
 import DonorList from "../components/DonorList";
+import Link from "next/link";
 
 export default function Home({ staticData, name }) {
   return (
@@ -25,7 +25,9 @@ export default function Home({ staticData, name }) {
         <section className={styles.main__hero}>
           <div className={styles.main__hero__textbtn}>
             <h1>Donate Plasma and Save lives</h1>
-            <button>Register Now</button>
+            <Link href="/donor">
+              <button>Register Now</button>
+            </Link>
           </div>
           <img
             src="/homepage/blood-drop.svg"

@@ -1,0 +1,56 @@
+.header {
+  width: 90%;
+  margin: 2rem;
+  &__logo {
+    height: 3.5rem;
+  }
+}
+
+.main {
+  margin: 1rem 2rem;
+  height: 82vh;
+  &__h1 {
+    font-size: 2.2rem;
+    padding-bottom: 1rem;
+    color: var(--font-color);
+  }
+  &__p {
+    font-size: 1.3rem;
+    color: var(--font-color);
+    span:nth-child(2) {
+      color: var(--accent-color);
+      padding-left: 0.5rem;
+      font-weight: 500;
+    }
+  }
+  form {
+    padding-top: 4rem;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    input {
+      padding: 1.5rem 2rem;
+      width: 100%;
+      margin-bottom: 2rem;
+      outline: none;
+      border-radius: 0.5rem;
+      border: none;
+      background-color: var(--input-background-color);
+      font-size: 1.3rem;
+      color: var(--font-color);
+      &:focus {
+        border: 2px solid var(--accent-color);
+      }
+    }
+    button {
+      background-color: var(--accent-color);
+      border: none;
+      padding: 1.5rem;
+      font-size: 1.5rem;
+      font-weight: 500;
+      color: white;
+      border-radius: 0.5rem;
+    }
+  }
+}
