@@ -1,0 +1,53 @@
+.header {
+  width: 100%;
+  height: 7rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0rem 3rem 0rem 0rem;
+  &__search {
+    height: 2.5rem;
+    width: 2.5rem;
+  }
+}
+
+.main {
+  margin: 2rem;
+  &__hero {
+    display: flex;
+    &__textbtn {
+      width: 70%;
+      h1 {
+        color: var(--font-color);
+        font-size: 2.2rem;
+        padding-bottom: 2rem;
+      }
+      button {
+        border: none;
+        outline: none;
+        background-color: var(--accent-color);
+        color: white;
+        padding: 1rem 1.5rem;
+        border-radius: 0.5rem;
+      }
+    }
+    &__img {
+      width: 30%;
+    }
+  }
+}
+
+.main__details {
+  padding: 4rem 0rem 0rem 0rem;
+  &__title {
+    &__bold {
+      font-size: 2rem;
+      color: var(--font-color);
+    }
+    &__subtitle {
+      font-size: 1rem;
+      font-weight: 400;
+      padding-left: 0.5rem;
+    }
+  }
+}
