@@ -2,6 +2,7 @@ import Head from "next/head";
 import styles from "../styles/pages/Home.module.scss";
 import { db } from "../config/fire-config";
 import DonorList from "../components/DonorList";
+import PopUp from "../components/PopUp";
 import Link from "next/link";
 
 export default function Home({ staticData }) {

@@ -3,10 +3,14 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import style from "../styles/pages/Donor.module.scss";
 import { auth, db } from "../config/fire-config";
+import PopUp from "../components/PopUp";
+import { useState } from "react";
 
 export default function Search() {
   const { register, handleSubmit } = useForm();
   const router = useRouter();
+
+  const [registered, setRegistered] = useState(false);
 
   const submitData = (data) => {
     if (auth().currentUser) {
@@ -47,10 +51,19 @@ export default function Search() {
           <input type="number" placeholder="Contact" {...register("contact")} />
 
           {/* <Link href="/"> */}
-          <button type="submit">Submit</button>
+          <button onClick={() => setRegistered(true)}>Submit</button>
           {/* </Link> */}
         </form>
       </main>
+      {registered && (
+        <PopUp
+          title="Thanks"
+          subtitle="For registered as a plasma donor"
+          imagePath="thanks.svg"
+          onClick={() => console.log("click")}
+          btnText="Go to Home Page"
+        />
+      )}
     </>
   );
 }
