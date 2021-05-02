@@ -52,7 +52,7 @@ export default function Home({ staticData }) {
 }
 
 export async function getStaticProps() {
-  console.log(process.env);
+  console.log(process.env.NEXT_PUBLIC_API_KEY);
   const res = await db().collection("donors").get();
   const normalizedRes = res.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
   console.log(normalizedRes);
