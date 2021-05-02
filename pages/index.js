@@ -1,10 +1,10 @@
 import Head from "next/head";
 import styles from "../styles/pages/Home.module.scss";
-import fire from "../config/fire-config";
+import { db } from "../config/fire-config";
 import DonorList from "../components/DonorList";
 import Link from "next/link";
 
-export default function Home({ staticData, name }) {
+export default function Home({ staticData }) {
   return (
     <div className={styles.container}>
       <Head>
@@ -52,7 +52,7 @@ export default function Home({ staticData, name }) {
 }
 
 export async function getStaticProps() {
-  const res = await fire.firestore().collection("donors").get();
+  const res = await db().collection("donors").get();
   const normalizedRes = res.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
   console.log(normalizedRes);
 

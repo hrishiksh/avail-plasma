@@ -1,0 +1,21 @@
+.header {
+  width: 100%;
+  height: 7rem;
+  margin: 2rem;
+  &__logo {
+    height: 3.5rem;
+  }
+}
+
+.main {
+  margin: 1rem 2rem;
+  h1 {
+    font-size: 2.2rem;
+    color: var(--font-color);
+  }
+  p {
+    font-size: 1.3rem;
+    color: var(--font-color);
+    margin-bottom: 10rem;
+  }
+}

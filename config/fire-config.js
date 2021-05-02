@@ -1,22 +1,24 @@
-import firebase from "firebase";
+import firebase from "firebase/app";
+import "firebase/auth";
+import "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDnE-FUOfFQozrWHIsLsrUeuJJuYo3vLtk",
-  authDomain: "availplasma.firebaseapp.com",
-  projectId: "availplasma",
-  storageBucket: "availplasma.appspot.com",
-  messagingSenderId: "76551403257",
-  appId: "1:76551403257:web:ec19d5cd08a954121a1428",
-  measurementId: "G-YGCFK0EN6R",
+  apiKey: process.env.API_KEY,
+  authDomain: process.env.API_DOMAIN,
+  projectId: process.env.PROJECT_ID,
+  storageBucket: process.env.STORAGE_BUCKET,
+  messagingSenderId: process.env.SENDER_ID,
+  appId: process.env.APP_ID,
+  measurementId: process.env.MEASUREMENT_ID,
 };
 
-try {
+if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig);
-} catch (err) {
-  if (!/already exists/.test(err.message)) {
-    console.error("Firebase initialisaion error", err.stack);
-  }
 }
 
-const fire = firebase;
-export default fire;
+const app = firebase.app();
+const auth = firebase.auth;
+const db = firebase.firestore;
+const now = firebase.firestore.Timestamp.now();
+
+export { app, auth, db, now };
