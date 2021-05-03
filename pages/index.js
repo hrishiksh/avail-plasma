@@ -3,21 +3,10 @@ import styles from "../styles/pages/Home.module.scss";
 import { db } from "../config/fire-config";
 import DonorList from "../components/DonorList";
 import PrimaryBtn from "../components/PrimaryBtn";
+import Share from "../components/Share";
+import InfoCard from "../components/InfoCard";
 
 export default function Home({ staticData }) {
-  const onShare = () => {
-    if (navigator.share) {
-      navigator
-        .share({
-          title: "Avail Plasma",
-          text: "Donate for a better cause",
-          url: "https://avail-plasma.vercel.app",
-        })
-        .then(() => console.log("Successful share"))
-        .catch((err) => console.log("Error sharing", err));
-    }
-  };
-
   return (
     <div className={styles.container}>
       <Head>
@@ -27,9 +16,7 @@ export default function Home({ staticData }) {
 
       <header className={styles.header}>
         <img src="logo.svg" className={styles.header__logo} />
-        <svg onClick={onShare} className={styles.header__search}>
-          <use href="sprite.svg#icon-share-2" />
-        </svg>
+        <Share />
       </header>
 
       <main className={styles.main}>
@@ -55,7 +42,15 @@ export default function Home({ staticData }) {
               (Plasma Donor)
             </span>
           </h2>
-          <DonorList donorData={staticData} />
+          {staticData?.map((data) => (
+            <InfoCard
+              name={data.name}
+              bloodGr={data.bloodGr}
+              district={data.district}
+              state={data.state}
+              contact={data.contact}
+            />
+          ))}
         </section>
       </main>
     </div>
