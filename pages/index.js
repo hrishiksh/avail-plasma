@@ -2,8 +2,7 @@ import Head from "next/head";
 import styles from "../styles/pages/Home.module.scss";
 import { db } from "../config/fire-config";
 import DonorList from "../components/DonorList";
-import PopUp from "../components/PopUp";
-import Link from "next/link";
+import PrimaryBtn from "../components/PrimaryBtn";
 
 export default function Home({ staticData }) {
   const onShare = () => {
@@ -39,9 +38,7 @@ export default function Home({ staticData }) {
         <section className={styles.main__hero}>
           <div className={styles.main__hero__textbtn}>
             <h1>Donate Plasma and Save lives</h1>
-            <Link href="/donor">
-              <button>Register Now</button>
-            </Link>
+            <PrimaryBtn href="/donor">Register Now</PrimaryBtn>
           </div>
           <img
             src="/homepage/blood-drop.svg"

@@ -5,14 +5,12 @@ import style from "../styles/pages/Donor.module.scss";
 import { auth, db } from "../config/fire-config";
 import PopUp from "../components/PopUp";
 import PrimaryBtn from "../components/PrimaryBtn";
-import { useState, useEffect } from "react";
+import { useState, useContext } from "react";
+import { usercontext } from "../state/context/userProvider";
 
 export default function Search() {
   const { register, handleSubmit } = useForm();
-  const router = useRouter();
-  useEffect(() => {
-    console.log(auth().currentUser);
-  });
+  const globelUser = useContext(usercontext);
 
   const [cardVisibility, setCardVisibility] = useState({
     isUser: undefined,
@@ -20,7 +18,7 @@ export default function Search() {
   });
 
   const submitData = (data) => {
-    if (auth().currentUser) {
+    if (globelUser) {
       db()
         .collection("donors")
         .doc(auth().currentUser.uid)
@@ -34,7 +32,7 @@ export default function Search() {
           console;
         });
       return console.log("User is authenticated");
-    } else if (auth().currentUser === null) {
+    } else if (globelUser === null) {
       setCardVisibility({ isUser: false, iserror: false });
       return console.log("Please log in");
     }
@@ -47,7 +45,7 @@ export default function Search() {
           title="Thanks"
           subtitle="For registered as a plasma donor"
           imagePath="success.svg"
-          onClick={() => router.push("/")}
+          href="/"
           btnText="Go to Home Page"
         />
       );
@@ -60,7 +58,7 @@ export default function Search() {
           title="Sorry"
           subtitle="We are facing some errors"
           imagePath="warning.svg"
-          onClick={() => router.push("/")}
+          href="/"
           btnText="Go to Home Page"
         />
       );
@@ -73,7 +71,7 @@ export default function Search() {
           title="Oops"
           subtitle="Please Login to continue"
           imagePath="warning.svg"
-          onClick={() => router.push("/login")}
+          href="/login"
           btnText="Go to Login Page"
         />
       );
@@ -81,7 +79,7 @@ export default function Search() {
       return <div></div>;
     }
   };
-
+  console.log(globelUser);
   return (
     <>
       <header className={style.header}>
@@ -89,12 +87,14 @@ export default function Search() {
       </header>
       <main className={style.main}>
         <h1 className={style.main__h1}>Register as Donor</h1>
-        <p className={style.main__p}>
-          <span>Please logIn before submission</span>
-          <Link href="/login">
-            <span>logIn</span>
-          </Link>
-        </p>
+        {globelUser === null && (
+          <p className={style.main__p}>
+            <span>Please logIn before submission</span>
+            <Link href="/login">
+              <span>logIn</span>
+            </Link>
+          </p>
+        )}
         <form onSubmit={handleSubmit(submitData)}>
           <input type="text" placeholder="Name" {...register("name")} />
           <input
@@ -105,8 +105,7 @@ export default function Search() {
           <input type="text" placeholder="State" {...register("state")} />
           <input type="text" placeholder="District" {...register("district")} />
           <input type="number" placeholder="Contact" {...register("contact")} />
-
-          <PrimaryBtn type="submit">Submit</PrimaryBtn>
+          {globelUser !== null && <PrimaryBtn type="submit">Submit</PrimaryBtn>}
         </form>
       </main>
 
