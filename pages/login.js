@@ -2,10 +2,13 @@ import { useState, useEffect } from "react";
 import { auth } from "../config/fire-config";
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
 import style from "../styles/pages/Login.module.scss";
+import PopUp from "../components/PopUp";
 
 export default function UiSign() {
+  const [isError, setIsError] = useState(false);
+
   const uiconfig = {
-    signInFlow: "popup",
+    signInFlow: "redirect",
     signInOptions: [
       {
         provider: auth.GoogleAuthProvider.PROVIDER_ID,
@@ -26,14 +29,16 @@ export default function UiSign() {
         console.log(redirectUrl);
         return true;
       },
+      signInFailure: (error) => {
+        console.log(error.code);
+        setIsError(true);
+      },
     },
   };
 
-  const [user, setUser] = useState();
-
   useEffect(() => {
     auth().onAuthStateChanged((user) => {
-      console.log(`AUTH_STATE --> ${user.displayName}`);
+      console.log(`AUTH_STATE --> ${user?.displayName}`);
     });
   }, []);
 
@@ -50,6 +55,15 @@ export default function UiSign() {
           firebaseAuth={auth()}
         ></StyledFirebaseAuth>
       </main>
+      {isError && (
+        <PopUp
+          title="Oops!"
+          subtitle="Error! Please try again"
+          imagePath="warning.svg"
+          btnText="Try again"
+          onClick={() => setIsError(false)}
+        ></PopUp>
+      )}
     </>
   );
 }

@@ -4,13 +4,20 @@ import Link from "next/link";
 import style from "../styles/pages/Donor.module.scss";
 import { auth, db } from "../config/fire-config";
 import PopUp from "../components/PopUp";
-import { useState } from "react";
+import PrimaryBtn from "../components/PrimaryBtn";
+import { useState, useEffect } from "react";
 
 export default function Search() {
   const { register, handleSubmit } = useForm();
   const router = useRouter();
+  useEffect(() => {
+    console.log(auth().currentUser);
+  });
 
-  const [registered, setRegistered] = useState(false);
+  const [cardVisibility, setCardVisibility] = useState({
+    isUser: undefined,
+    iserror: undefined,
+  });
 
   const submitData = (data) => {
     if (auth().currentUser) {
@@ -18,12 +25,61 @@ export default function Search() {
         .collection("donors")
         .doc(auth().currentUser.uid)
         .set(data, { merge: true })
-        .then(() => console.log("Successfully written"))
-        .catch((err) => console.error(err));
-      // router.push("/");
+        .then(() => {
+          setCardVisibility({ isUser: true, iserror: false });
+          console.log("Data entered");
+        })
+        .catch((err) => {
+          setCardVisibility({ isUser: true, iserror: true });
+          console;
+        });
       return console.log("User is authenticated");
+    } else if (auth().currentUser === null) {
+      setCardVisibility({ isUser: false, iserror: false });
+      return console.log("Please log in");
     }
-    return console.log("Please log in");
+  };
+
+  const Card = () => {
+    if (cardVisibility.isUser === true && cardVisibility.iserror === false) {
+      return (
+        <PopUp
+          title="Thanks"
+          subtitle="For registered as a plasma donor"
+          imagePath="success.svg"
+          onClick={() => router.push("/")}
+          btnText="Go to Home Page"
+        />
+      );
+    } else if (
+      cardVisibility.isUser === true &&
+      cardVisibility.iserror === true
+    ) {
+      return (
+        <PopUp
+          title="Sorry"
+          subtitle="We are facing some errors"
+          imagePath="warning.svg"
+          onClick={() => router.push("/")}
+          btnText="Go to Home Page"
+        />
+      );
+    } else if (
+      cardVisibility.isUser === false &&
+      cardVisibility.iserror === false
+    ) {
+      return (
+        <PopUp
+          title="Oops"
+          subtitle="Please Login to continue"
+          imagePath="warning.svg"
+          onClick={() => router.push("/login")}
+          btnText="Go to Login Page"
+        />
+      );
+    } else {
+      return <div></div>;
+    }
   };
 
   return (
@@ -34,7 +90,7 @@ export default function Search() {
       <main className={style.main}>
         <h1 className={style.main__h1}>Register as Donor</h1>
         <p className={style.main__p}>
-          <span>Please logIn before registration</span>
+          <span>Please logIn before submission</span>
           <Link href="/login">
             <span>logIn</span>
           </Link>
@@ -50,20 +106,11 @@ export default function Search() {
           <input type="text" placeholder="District" {...register("district")} />
           <input type="number" placeholder="Contact" {...register("contact")} />
 
-          {/* <Link href="/"> */}
-          <button onClick={() => setRegistered(true)}>Submit</button>
-          {/* </Link> */}
+          <PrimaryBtn type="submit">Submit</PrimaryBtn>
         </form>
       </main>
-      {registered && (
-        <PopUp
-          title="Thanks"
-          subtitle="For registered as a plasma donor"
-          imagePath="thanks.svg"
-          onClick={() => console.log("click")}
-          btnText="Go to Home Page"
-        />
-      )}
+
+      {Card()}
     </>
   );
 }

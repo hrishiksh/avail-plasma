@@ -6,6 +6,19 @@ import PopUp from "../components/PopUp";
 import Link from "next/link";
 
 export default function Home({ staticData }) {
+  const onShare = () => {
+    if (navigator.share) {
+      navigator
+        .share({
+          title: "Avail Plasma",
+          text: "Donate for a better cause",
+          url: "https://avail-plasma.vercel.app",
+        })
+        .then(() => console.log("Successful share"))
+        .catch((err) => console.log("Error sharing", err));
+    }
+  };
+
   return (
     <div className={styles.container}>
       <Head>
@@ -15,8 +28,8 @@ export default function Home({ staticData }) {
 
       <header className={styles.header}>
         <img src="logo.svg" className={styles.header__logo} />
-        <svg className={styles.header__search}>
-          <use href="sprite.svg#icon-search" />
+        <svg onClick={onShare} className={styles.header__search}>
+          <use href="sprite.svg#icon-share-2" />
         </svg>
       </header>
 
