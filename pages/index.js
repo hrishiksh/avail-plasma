@@ -23,27 +23,25 @@ export default function Home({ staticData }) {
         {/* Hero content with a register now button */}
 
         <section className={styles.main__hero}>
-          <div className={styles.main__hero__textbtn}>
-            <h1>Donate Plasma and Save lives</h1>
-            <PrimaryBtn href="/donor">Register Now</PrimaryBtn>
-          </div>
-          <img
-            src="/homepage/blood-drop.svg"
-            className={styles.main__hero__img}
-          ></img>
+          <h1>Get help from people all over the world</h1>
+          <p>An opensource platform to help covid patients</p>
+          <PrimaryBtn href="/donor">Register now</PrimaryBtn>
         </section>
 
         {/* contain details of a plasma donor */}
 
         <section className={styles.main__details}>
           <h2 className={styles.main__details__title}>
-            <span className={styles.main__details__title__bold}>Details</span>
+            <span className={styles.main__details__title__bold}>
+              Detail List
+            </span>
             <span className={styles.main__details__title__subtitle}>
-              (Plasma Donor)
+              (plasma seeker)
             </span>
           </h2>
           {staticData?.map((data) => (
             <InfoCard
+              key={data.id}
               name={data.name}
               bloodGr={data.bloodGr}
               district={data.district}

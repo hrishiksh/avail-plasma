@@ -86,7 +86,7 @@ export default function Search() {
         <img src="logo.svg" alt="logo" className={style.header__logo} />
       </header>
       <main className={style.main}>
-        <h1 className={style.main__h1}>Register as Donor</h1>
+        <h1 className={style.main__h1}>Register Patient</h1>
         {globelUser === null && (
           <p className={style.main__p}>
             <span>Please logIn before submission</span>

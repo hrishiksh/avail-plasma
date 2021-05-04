@@ -7,6 +7,7 @@ export default function PopUp({
   imagePath,
   btnText,
   onClick,
+  href,
 }) {
   return (
     <>
@@ -15,7 +16,7 @@ export default function PopUp({
           <h2>{title}</h2>
           <p>{subtitle}</p>
           <img src={imagePath} />
-          <PrimaryBtn onClick={onClick} className={style.modBtn}>
+          <PrimaryBtn onClick={onClick} className={style.modBtn} href={href}>
             {btnText}
           </PrimaryBtn>
         </div>

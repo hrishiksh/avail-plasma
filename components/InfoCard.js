@@ -10,7 +10,7 @@ export default function InfoCard({ name, bloodGr, state, district, contact }) {
       <div className={style.InfoCard__textBlock}>
         <h3>
           <span>{name}</span>
-          <span>{bloodGr}</span>
+          <span> ({bloodGr})</span>
         </h3>
         <p>
           <span>{district},</span>
