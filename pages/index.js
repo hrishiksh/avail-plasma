@@ -65,5 +65,6 @@ export async function getStaticProps() {
     props: {
       staticData: normalizedRes,
     },
+    revalidate: 20,
   };
 }
