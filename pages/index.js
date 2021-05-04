@@ -1,7 +1,6 @@
 import Head from "next/head";
 import styles from "../styles/pages/Home.module.scss";
 import { db } from "../config/fire-config";
-import DonorList from "../components/DonorList";
 import PrimaryBtn from "../components/PrimaryBtn";
 import Share from "../components/Share";
 import InfoCard from "../components/InfoCard";
@@ -65,6 +64,6 @@ export async function getStaticProps() {
     props: {
       staticData: normalizedRes,
     },
-    revalidate: 20,
+    revalidate: 60,
   };
 }
