@@ -11,3 +11,8 @@ Donor schema
   "contact": number
 }
 ```
+
+Todo:
+
+- [] Show card when user tap on lock icon
+- [] make donate button
